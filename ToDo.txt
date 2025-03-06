@@ -1,0 +1,67 @@
+High Priority:
+
+- Options for "UE4 DDS Tools"
+
+- "" Insensitive PNG Paths
+
+- Automatic detection of PNG Files in a Input Folder as alternative to Paths.
+  Listing and choosing from a menu during Inject
+
+- Check for correct Texture Sizes
+  Open https://www.katsbits.com/site/make-better-textures-correct-size-and-power-of-two/ if failed
+
+
+Medium Priority:
+
+- Bugs :hidethepain:
+
+- Backup Tool
+
+- Automatic Path detection of Game Files
+
+- Automatic Import & Exporting
+
+- Better Documentation
+
+- Solid Error Reports, both read- and understandable by the lowly commoners.
+
+- Improved File check
+
+- Reducing the amount of individual scripts, less stuff for the user to break
+
+
+Low Priority:
+
+- Testing and adding official support for all Filetypes currently "supported" by "UE4 DDS Tools"
+
+	- Tested working
+
+	 - PNG
+
+	- Tested broken
+	
+	 - DDS (Injection Fails)
+
+	- Untested
+	
+	 - bmp
+	 - jpg
+	 - hdr
+	 - tga
+
+- Add menu entry for explaining the benefits and downsides of different image file types
+
+- Clean up visual inconsistencies
+
+- Automatic Detection of Shirt Uassets, ignore list for unused
+
+- Support for other Cosmetics
+
+
+Eventually:
+
+- Replacing repak with something that supports OODLE
+
+- Re-Writing in likely Python, unlikely JS or Rust
+
+- Linux Support because Windows just bad
