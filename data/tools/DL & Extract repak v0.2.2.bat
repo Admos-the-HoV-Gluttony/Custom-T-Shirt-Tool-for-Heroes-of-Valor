@@ -2,8 +2,6 @@
 setlocal
 
 set "url=https://github.com/trumank/repak/releases/download/v0.2.2/repak_cli-x86_64-pc-windows-msvc.zip"
-
-"
 set "zipFile=repak_cli-x86_64-pc-windows-msvc.zip"
 set "destinationFolder=data\tools\repak"
 
