@@ -9,6 +9,12 @@ set /p "userChoice=Do you want to open both Folders? (y/n): "
 if /i "!userChoice!"=="y" (
     set "secondPath=data\Imported Game Files"
 
+    REM Check if the directory exists, and create it if it does not
+    if not exist "!secondPath!" (
+        echo The directory "!secondPath!" does not exist. Creating it now...
+        mkdir "!secondPath!"
+    )
+
     echo The second path is: !secondPath!
     explorer "!secondPath!"
 
