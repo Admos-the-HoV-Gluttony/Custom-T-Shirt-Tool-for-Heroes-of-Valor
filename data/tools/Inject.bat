@@ -34,7 +34,6 @@ set /p choice=Enter your choice:
 if %choice% equ 0 (
     echo Exiting.
     exit /b
-
 )
 
 if not defined uassetList[%choice%] (
@@ -47,10 +46,16 @@ set "selectedUasset=!uassetList[%choice%]!"
 cls
 echo Please provide the path to a PNG file or drag and drop it here:
 echo.
-echo If a PNG file isn't working, consider simplifying the filename to something like 'texture'.
-echo.
 set /p pngFile=Enter the path to a PNG file: 
 
-data\tools\DDS-Tools-v0.6.1-Batch\python\python.exe data\tools\DDS-Tools-v0.6.1-Batch\src\main.py "%selectedUasset%" "%pngFile%" --save_folder="data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor\HeroesOfValor\Content\Textures\CosmeticItems" --version=4.27
+set "pngFile=%pngFile:"=%"
+
+if not exist "%pngFile%" (
+    echo The specified PNG file does not exist.
+    pause
+    goto :menu
+)
+
+data\tools\DDS-Tools-v0.6.1-Batch\python\python.exe data\tools\DDS-Tools-v0.6.1-Batch\src\main.py "!selectedUasset!" "%pngFile%" --save_folder="data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor\HeroesOfValor\Content\Textures\CosmeticItems" --version=4.27
 
 exit /b
