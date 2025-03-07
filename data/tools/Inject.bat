@@ -56,6 +56,6 @@ if not exist "%pngFile%" (
     goto :menu
 )
 
-data\tools\DDS-Tools-v0.6.1-Batch\python\python.exe data\tools\DDS-Tools-v0.6.1-Batch\src\main.py "!selectedUasset!" "%pngFile%" --save_folder="data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor\HeroesOfValor\Content\Textures\CosmeticItems" --version=4.27
+data\tools\DDS-Tools-v0.6.1-Batch\python\python.exe data\tools\DDS-Tools-v0.6.1-Batch\src\main.py "!selectedUasset!" "%pngFile%" --save_folder="data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor\HeroesOfValor\Content\Textures\CosmeticItems" --version=4.27 --skip_non_texture --image_filter=cubic
 
 exit /b
