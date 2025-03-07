@@ -15,7 +15,7 @@ echo.
 echo ============================================
 echo.
 
-set /p choice="Select an option (1-5): "
+set /p choice="Please select an option (1-5): "
 
 if "%choice%" == "1" (
     call "data\tools\Packaging.bat"
