@@ -11,6 +11,9 @@ echo 2. Inject - Repeatable before the next step
 echo 3. Packaging Tools - Repackage
 echo 4. Export Modified Game Files
 echo.
+echo Remove Existing Unpackaged Game Files Before Unpacking New Ones!
+echo Please perform this action using the Packaging Tools.
+echo.
 
 pause
 exit /b
