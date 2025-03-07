@@ -2,15 +2,18 @@
 :menu
 
 cls
-echo =========================================================
-echo           	    Texture Converter
-echo =========================================================
+echo ============================================
+echo            Texture Converter Menu
+echo ============================================
+echo.
 echo 1. Packaging Tools
 echo 2. Inject Texture
 echo 3. Export Modified Files
 echo 4. Help
 echo 5. Exit
-echo =========================================================
+echo.
+echo ============================================
+echo.
 set /p choice="Select an option (1-5): "
 
 if "%choice%"=="1" (
