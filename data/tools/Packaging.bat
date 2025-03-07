@@ -1,32 +1,28 @@
 @echo off
 :menu
+
 cls
-echo =========================================================
-echo  		     Packaging Tools
-echo =========================================================
+echo ============================================
+echo             Packaging Tools Menu
+echo ============================================
+echo.
 echo 1. Unpackage
 echo 2. Repackage
-echo 3. Return to Texture Converter
-echo =========================================================
+echo 5. Quit
+echo.
+echo ============================================
+echo.
+set /p choice=Choose an option (1-5): 
 
-set /p choice=Choose an option [1-3]: 
+if "%choice%"=="1" (
+    call "data\tools\Unpackage.bat"
+) else if "%choice%"=="2" (
+    call "data\tools\Repackage.bat"
+) else if "%choice%"=="5" (
+    echo Quitting the program.
+    exit /b 0
+) else (
+    echo Invalid option. Please select a number between 1 and 5.
+)
 
-if "%choice%"=="1" goto unpackage
-if "%choice%"=="2" goto repackage
-if "%choice%"=="3" goto exit
-
-:unpackage
-cls
-echo Unpacking...
-call "data\tools\Unpackage.bat"
 goto menu
-
-:repackage
-cls
-echo Repacking...
-call "data\tools\Repackage.bat"
-goto menu
-
-:exit
-cls
-exit /b 0
