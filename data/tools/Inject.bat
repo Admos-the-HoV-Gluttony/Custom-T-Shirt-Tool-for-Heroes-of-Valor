@@ -47,8 +47,7 @@ set "selectedUasset=!uassetList[%choice%]!"
 cls
 echo Please provide the path to a PNG file or drag and drop it here:
 echo.
-echo Paths within "" quotation marks are currently unsupported
-echo Remove "" before confirming a path
+echo If a PNG file isn't working, consider simplifying the filename to something like 'texture'.
 echo.
 set /p pngFile=Enter the path to a PNG file: 
 
