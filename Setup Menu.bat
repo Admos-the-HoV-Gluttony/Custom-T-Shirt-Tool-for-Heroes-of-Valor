@@ -2,15 +2,18 @@
 :menu
 
 cls
-echo ========================================================
-echo           	      Setup Menu
-echo ========================================================
-echo 1. "DL & Extract repak v0.2.2"
-echo 2. "DL, Extract & Fix UE4 DDS Tools v0.6.1"
-echo 3. "Set Path to Game Files"
-echo 4. "Import Game Files"
-echo 5. "Quit"
-echo ========================================================
+echo ============================================
+echo           	 Setup Menu
+echo ============================================
+echo.
+echo 1. DL and Extract repak v0.2.2
+echo 2. DL, Extract and Fix UE4 DDS Tools v0.6.1
+echo 3. Set Path to Game Files
+echo 4. Import Game Files
+echo 5. Quit
+echo.
+echo ============================================
+echo.
 set /p choice="Select an option (1-5): "
 
 if "%choice%"=="1" (
