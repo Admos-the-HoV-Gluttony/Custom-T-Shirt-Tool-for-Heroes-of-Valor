@@ -1,6 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
 
+cls
+
 :loop
 echo Warning: Automatic importing is not yet supported. User intervention is required.
 echo Please note that you need to copy all contents from "Heroes of Valor Playtest" to "Imported Game Files".
@@ -9,7 +11,6 @@ set /p "userChoice=Do you want to open both Folders? (y/n): "
 if /i "!userChoice!"=="y" (
     set "secondPath=data\Imported Game Files"
 
-    REM Check if the directory exists, and create it if it does not
     if not exist "!secondPath!" (
         echo The directory "!secondPath!" does not exist. Creating it now...
         mkdir "!secondPath!"
