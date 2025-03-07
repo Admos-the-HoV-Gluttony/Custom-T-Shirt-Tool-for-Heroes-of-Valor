@@ -10,11 +10,15 @@ exit /b %errorlevel%
 
 :menu
 cls
-echo Test Enviorment Menu
+echo ==========================================
+echo            Test Enviorment Menu
+echo ==========================================
 echo.
-echo 1. Run Test Environment
-echo 2. Help
-echo 3. Exit
+echo 1. "Run Test Environment"
+echo 2. "Help"
+echo 3. "Exit"
+echo.
+echo ==========================================
 echo.
 
 set /p choice=Please select an option (1-3):
