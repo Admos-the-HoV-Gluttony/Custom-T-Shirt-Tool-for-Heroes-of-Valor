@@ -21,7 +21,7 @@ echo.
 echo ============================================
 echo.
 
-set /p choice = Please select an option (1-3):
+set /p choice="Please select an option (1-3): "
 
 if "%choice%" == "1" (
     start "" "data\Imported Game Files\HeroesOfValor.exe"
