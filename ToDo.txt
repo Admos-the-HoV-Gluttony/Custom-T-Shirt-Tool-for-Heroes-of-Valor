@@ -2,7 +2,7 @@ High Priority:
 
 - Options for "UE4 DDS Tools"
 
-- "" Insensitive PNG Paths
+- Insensitive PNG Paths
 
 - Automatic detection of PNG Files in a Input Folder as alternative to Paths.
   Listing and choosing from a menu during Inject
