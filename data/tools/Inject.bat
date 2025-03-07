@@ -19,19 +19,22 @@ for /L %%i in (1,1,8) do (
 :menu
 cls
 echo Please select one of the following UASSET files to override:
+echo.
 for /L %%i in (1,1,%count%) do (
     for %%f in ("!uassetList[%%i]!") do (
         set "filename=%%~nxf"
     )
     echo [%%i] !filename!
 )
+echo.
 echo [0] Exit
-
+echo.
 set /p choice=Enter your choice: 
 
 if %choice% equ 0 (
     echo Exiting.
     exit /b
+
 )
 
 if not defined uassetList[%choice%] (
@@ -41,7 +44,12 @@ if not defined uassetList[%choice%] (
 
 set "selectedUasset=!uassetList[%choice%]!"
 
+cls
 echo Please provide the path to a PNG file or drag and drop it here:
+echo.
+echo Paths within "" quotation marks are currently unsupported
+echo Remove "" before confirming a path
+echo.
 set /p pngFile=Enter the path to a PNG file: 
 
 data\tools\DDS-Tools-v0.6.1-Batch\python\python.exe data\tools\DDS-Tools-v0.6.1-Batch\src\main.py "%selectedUasset%" "%pngFile%" --save_folder="data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor\HeroesOfValor\Content\Textures\CosmeticItems" --version=4.27
