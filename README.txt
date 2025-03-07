@@ -26,8 +26,10 @@ Compatibility with other versions is not guaranteed.
 
 Perquisites:
 
+1. Windows or "insert your favorite compatibility layer / VM". Support for Linux comes eventually.
 
-1. The path to the "Heroes of Valor" game-files.
+
+2. The path to the "Heroes of Valor" game-files.
    
 	Launch the Steam client on your computer.
 	
@@ -44,7 +46,7 @@ Perquisites:
 	Right-click "Heroes of Valor Playtest" in the address bar. Click copy address.
 
 
-2. Run the Setup and complete every single step of it, do not skip anything the first time you use it!
+3. Run the Setup and complete every single step of it, do not skip anything the first time you use it!
    The setup requires a Internet connection for downloading the following packages from GitHub:
 
 	repak: https://github.com/trumank/repak/releases/tag/v0.2.2
@@ -52,7 +54,7 @@ Perquisites:
 	UE4 DDS Tools Batch: https://github.com/matyalatte/UE4-DDS-Tools/releases/tag/v0.6.1
 
 
-3. Providing Images for the conversion.
+4. Providing Images for the conversion.
 
 	It only accepts paths without "" will be fixed at a later point, for now just remove them.
 
@@ -77,7 +79,8 @@ Perquisites:
 	For a list of all supported file types see: https://github.com/matyalatte/UE4-DDS-Tools
 
 
-4. Use the "Test Enviorment" before moving your modified game files to your main install.
+Use the "Test Enviorment" before moving your modified game files to your main install.
+Faster than exporting and launching through Steam for every test.
 
 
 Credits:
