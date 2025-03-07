@@ -22,7 +22,7 @@ The Tool was last tested with **Heroes of Valor Playtest** version **0.1.2.377**
 
 ## Prerequisites:
 
-- Windows or "insert your favorite compatibility layer / VM". Support for Linux comes eventually, maybe.
+- Windows or "insert your favorite compatibility layer / VM". Support for Linux comes eventually.
 
 - The filepath to your "Heroes of Valor" install location.
     
@@ -36,7 +36,7 @@ The Tool was last tested with **Heroes of Valor Playtest** version **0.1.2.377**
             <li>Right-click on <strong>Heroes of Valor Playtest</strong></li>
             <li>Select <strong>Properties</strong> from the context menu</li>
             <li>In the Properties window, go to the <strong>Installed Files</strong> tab</li>
-            <li>Click on the <strong>Browse local files...</strong> button</li>
+            <li>Click on the <strong>Browse...</strong> button</li>
             <li>Right-click <strong>Heroes of Valor Playtest</strong> in the address bar. Click copy address</li>
         </ul>
     </details>
@@ -46,9 +46,11 @@ The Tool was last tested with **Heroes of Valor Playtest** version **0.1.2.377**
 	- [repak](https://github.com/trumank/repak/releases/tag/v0.2.2)
 	- [UE4 DDS Tools Batch](https://github.com/matyalatte/UE4-DDS-Tools/releases/tag/v0.6.1)
 
-- Providing Images for the conversion.
+## Important Things To Note
 
-	<details>
+### Image Sizes
+
+<details>
         <summary>Supported image resolutions</summary>
         <ul>
             <li>128x128</li>
@@ -59,15 +61,11 @@ The Tool was last tested with **Heroes of Valor Playtest** version **0.1.2.377**
         </ul>
     </details>
 
-## Important Things To Note
-
-### Image Sizes
-
 As you can tell from the list of supported image resolutions all options are a power of 2, this is deliberate and should be adhered to!
 
 See https://www.katsbits.com/site/make-better-textures-correct-size-and-power-of-two/ for more information.
 
-Higher resolution isn't always better when it comes to make a texture, choose depending on your requirements.
+Higher resolution isn't always better when it comes to creating a texture, choose depending on your requirements.
 
 - Consider using copys of the included "Templates" as starting point.
 - Do not edit the original templates to reduce the risk of losing them.
