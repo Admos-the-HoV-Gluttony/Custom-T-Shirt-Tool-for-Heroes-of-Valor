@@ -1,6 +1,6 @@
 @echo off
-:menu
 
+:menu
 cls
 echo ============================================
 echo            Texture Converter Menu
@@ -14,18 +14,19 @@ echo 5. Exit
 echo.
 echo ============================================
 echo.
+
 set /p choice="Select an option (1-5): "
 
-if "%choice%"=="1" (
+if "%choice%" == "1" (
     call "data\tools\Packaging.bat"
-) else if "%choice%"=="2" (
+) else if "%choice%" == "2" (
     call "data\tools\Inject.bat"
     REM Add the code to inject texture here
-) else if "%choice%"=="3" (
+) else if "%choice%" == "3" (
     call "data\tools\Export.bat"
-) else if "%choice%"=="4" (
+) else if "%choice%" == "4" (
     call "data\tools\TC Help.bat"
-) else if "%choice%"=="5" (
+) else if "%choice%" == "5" (
     echo Exiting the program.
     exit /b
 ) else (
