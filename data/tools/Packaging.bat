@@ -8,21 +8,21 @@ echo ============================================
 echo.
 echo 1. Unpackage
 echo 2. Repackage
-echo 5. Quit
+echo 3. Quit
 echo.
 echo ============================================
 echo.
-set /p choice=Choose an option (1-5): 
+set /p choice=Choose an option (1-3): 
 
 if "%choice%"=="1" (
     call "data\tools\Unpackage.bat"
 ) else if "%choice%"=="2" (
     call "data\tools\Repackage.bat"
-) else if "%choice%"=="5" (
+) else if "%choice%"=="3" (
     echo Quitting the program.
     exit /b 0
 ) else (
-    echo Invalid option. Please select a number between 1 and 5.
+    echo Invalid option. Please select a number between 1 and 3.
 )
 
 goto menu
