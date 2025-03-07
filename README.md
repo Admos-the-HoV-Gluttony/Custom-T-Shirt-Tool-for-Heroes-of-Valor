@@ -48,8 +48,6 @@ The Tool was last tested with **Heroes of Valor Playtest** version **0.1.2.377**
 
 - Providing Images for the conversion.
 
-	It only accepts paths without "" will be fixed at a later point, for now just remove them.
-
 	<details>
         <summary>Supported image resolutions</summary>
         <ul>
