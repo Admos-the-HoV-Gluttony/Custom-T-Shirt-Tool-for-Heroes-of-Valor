@@ -4,6 +4,9 @@
 
 ## Usage
 
+Very Basic Video Tutorial. It is still recommended to read the README.
+https://youtu.be/7QDJPdhBSR8
+
 To use the tool you will need to make use of the following scripts found in the main folder:
 
 - **Setup Menu.bat**
