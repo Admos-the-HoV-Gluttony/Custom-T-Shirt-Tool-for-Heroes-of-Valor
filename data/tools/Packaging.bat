@@ -9,7 +9,7 @@ echo.
 echo 1. Unpackage
 echo 2. Repackage
 echo 3. Remove Unpackaged Game Files
-echo 4. Quit
+echo 4. Return to previous Menu
 echo.
 echo ============================================
 echo.
