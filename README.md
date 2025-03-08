@@ -11,7 +11,7 @@ To use the tool you will need to make use of the following scripts found in the 
 
 - **Setup Menu.bat**
 - **Texture Converter.bat**
-- **Test Enviorment.bat**
+- **Test Environment.bat**
 
 ***RUNNING OTHER SCRIPTS FOUND WITHIN THE FOLDERS IS LIKELY TO BREAK THINGS!***
 
