@@ -11,7 +11,7 @@ if exist "data\Imported Game Files\HeroesOfValor.exe" (
 :menu
 cls
 echo ============================================
-echo             Test Enviorment Menu
+echo               Test Environment
 echo ============================================
 echo.
 echo 1. Run Test Environment
