@@ -6,6 +6,7 @@ cls
 :loop
 echo Warning: Automatic importing is not yet supported. User intervention is required.
 echo Please note that you need to copy all contents from "Heroes of Valor Playtest" to "Imported Game Files".
+echo.
 set /p "userChoice=Do you want to open both Folders? (y/n): "
 
 if /i "!userChoice!"=="y" (
