@@ -2,6 +2,8 @@
 setlocal enabledelayedexpansion
 
 :loop
+echo Removing the Unpackaged Game Files before exporting is recommended!
+echo The unpacked game file can be deleted through the "Packaging Menu."
 echo Warning: Automatic exporting is not yet supported. User intervention is required.
 echo Please note that you need to copy all contents from "Imported Game Files" to "Heroes of Valor Playtest".
 set /p "userChoice=Do you want to open both Folders? (y/n): "
