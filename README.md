@@ -61,6 +61,7 @@ The Tool was last tested with **Heroes of Valor Playtest** version **0.1.2.377**
             <li>512x512</li>
             <li>1024x1024</li>
             <li>2048x2028</li>
+            <li>4096x4096</li>
         </ul>
     </details>
 
