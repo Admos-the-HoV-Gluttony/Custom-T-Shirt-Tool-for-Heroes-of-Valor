@@ -25,7 +25,7 @@ The Tool was last tested with **Heroes of Valor Playtest** version **0.1.2.377**
 
 ## Prerequisites:
 
-- Windows or "insert your favorite compatibility layer / VM". Support for Linux comes eventually.
+- Windows or "insert your favorite compatibility layer / VM". Native Linux Support comes eventually.
 
 - The filepath to your "Heroes of Valor" install location.
     
