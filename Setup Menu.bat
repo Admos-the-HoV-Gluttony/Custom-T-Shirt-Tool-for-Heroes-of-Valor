@@ -34,10 +34,9 @@ if "%choice%" == "1" (
 ) else if "%choice%" == "6" (
     call "Test Environment.bat"
 ) else if "%choice%" == "7" (
-    echo Quitting the program.
     exit
 ) else (
-    echo Invalid option. Please select a number between 1 and 5.
+    echo Invalid Input. Please select a number between 1 and 7.
 )
 
 goto menu
