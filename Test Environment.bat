@@ -5,7 +5,7 @@ if exist "data\Imported Game Files\HeroesOfValor.exe" (
 ) else (
     echo HeroesOfValor.exe not found. Running Setup Menu.bat.
     call "Setup Menu.bat"
-    exit /b %errorlevel%
+    exit %errorlevel%
 )
 
 :menu
@@ -16,12 +16,16 @@ echo ============================================
 echo.
 echo 1. Run Test Environment
 echo 2. Help
-echo 3. Exit
+echo.
+echo 3. Texture Converter
+echo 4. Setup Menu
+echo.
+echo 5. Exit
 echo.
 echo ============================================
 echo.
 
-set /p choice="Please select an option (1-3): "
+set /p choice="Please select an option (1-5): "
 
 if "%choice%" == "1" (
     start "" "data\Imported Game Files\HeroesOfValor.exe"
@@ -31,7 +35,11 @@ if "%choice%" == "1" (
     call "data\tools\TE Help.bat"
     goto menu
 ) else if "%choice%" == "3" (
-    exit /b 0
+    call "Texture Converter.bat"
+) else if "%choice%" == "4" (
+    call "Setup Menu.bat"
+) else if "%choice%" == "5" (
+    exit
 ) else (
     echo Invalid choice. Please try again.
     pause
