@@ -41,7 +41,7 @@ if "%choice%" == "1" (
 ) else if "%choice%" == "5" (
     exit
 ) else (
-    echo Invalid choice. Please try again.
+    echo Invalid Input. Please select a number between 1 and 5.
     pause
     goto menu
 )
