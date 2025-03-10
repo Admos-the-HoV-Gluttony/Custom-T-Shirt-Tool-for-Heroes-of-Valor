@@ -31,9 +31,9 @@ if "%choice%" == "1" (
 ) else if "%choice%" == "4" (
     call "data\tools\TC Help.bat"
 ) else if "%choice%" == "5" (
-    call "Setup Menu.bat"
-) else if "%choice%" == "6" (
     call "Test Environment.bat"
+) else if "%choice%" == "6" (
+    call "Setup Menu.bat"
 ) else if "%choice%" == "7" (
     exit
 ) else (
