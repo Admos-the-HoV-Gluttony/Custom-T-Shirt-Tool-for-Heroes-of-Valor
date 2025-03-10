@@ -10,7 +10,11 @@ echo 1. DL and Extract repak v0.2.2
 echo 2. DL, Extract and Fix UE4 DDS Tools v0.6.1
 echo 3. Set Path to Game Files
 echo 4. Import Game Files
-echo 5. Quit
+echo.
+echo 5. Texture Converter
+echo 6. Test Environment
+echo.
+echo 7. Exit
 echo.
 echo ============================================
 echo.
@@ -26,8 +30,12 @@ if "%choice%" == "1" (
 ) else if "%choice%" == "4" (
     call "data\tools\Import.bat"
 ) else if "%choice%" == "5" (
+    call "Texture Converter.bat"
+) else if "%choice%" == "6" (
+    call "Test Environment.bat"
+) else if "%choice%" == "7" (
     echo Quitting the program.
-    exit /b
+    exit
 ) else (
     echo Invalid option. Please select a number between 1 and 5.
 )
