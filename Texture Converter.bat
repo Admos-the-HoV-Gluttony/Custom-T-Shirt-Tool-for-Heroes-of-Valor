@@ -38,7 +38,7 @@ if "%choice%" == "1" (
     echo Exiting the program.
     exit
 ) else (
-    echo Invalid option. Please select a number between 1 and 7.
+    echo Invalid Input. Please select a number between 1 and 7.
     pause
 )
 
