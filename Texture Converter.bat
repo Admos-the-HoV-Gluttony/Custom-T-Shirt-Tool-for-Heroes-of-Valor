@@ -25,7 +25,6 @@ if "%choice%" == "1" (
     call "data\tools\Packaging.bat"
 ) else if "%choice%" == "2" (
     call "data\tools\Inject.bat"
-    REM Add the code to inject texture here
 ) else if "%choice%" == "3" (
     call "data\tools\Export.bat"
 ) else if "%choice%" == "4" (
