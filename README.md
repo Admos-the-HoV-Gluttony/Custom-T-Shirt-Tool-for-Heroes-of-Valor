@@ -2,6 +2,8 @@
 
 ***Early Test Version - Bugs and Missing Features are to be expected!***
 
+**The current Update script will create a new copy instead of overwriting the old if the main folders name had been changed!**
+
 ## Usage
 
 Very Basic Video Tutorial. It is still recommended to read the README.
