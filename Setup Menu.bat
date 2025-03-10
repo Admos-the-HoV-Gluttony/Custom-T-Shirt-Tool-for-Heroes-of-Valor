@@ -37,6 +37,7 @@ if "%choice%" == "1" (
     exit
 ) else (
     echo Invalid Input. Please select a number between 1 and 7.
+    pause
 )
 
 goto menu
