@@ -19,7 +19,7 @@ echo.
 echo ============================================
 echo.
 
-set /p choice="Please select an option (1-5): "
+set /p choice="Please select an option (1-7): "
 
 if "%choice%" == "1" (
     call "data\tools\Packaging.bat"
@@ -38,7 +38,7 @@ if "%choice%" == "1" (
     echo Exiting the program.
     exit
 ) else (
-    echo Invalid option. Please select a number between 1 and 5.
+    echo Invalid option. Please select a number between 1 and 7.
     pause
 )
 
