@@ -10,7 +10,11 @@ echo 1. Packaging Tools
 echo 2. Inject Texture
 echo 3. Export Modified Files
 echo 4. Help
-echo 5. Exit
+echo.
+echo 5. Test Environment
+echo 6. Setup Menu
+echo.
+echo 7. Exit
 echo.
 echo ============================================
 echo.
@@ -27,8 +31,12 @@ if "%choice%" == "1" (
 ) else if "%choice%" == "4" (
     call "data\tools\TC Help.bat"
 ) else if "%choice%" == "5" (
+    call "Setup Menu.bat"
+) else if "%choice%" == "6" (
+    call "Test Environment.bat"
+) else if "%choice%" == "7" (
     echo Exiting the program.
-    exit /b
+    exit
 ) else (
     echo Invalid option. Please select a number between 1 and 5.
     pause
