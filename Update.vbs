@@ -13,7 +13,7 @@ result = MsgBox("Update the Custom T-Shirt Tool for Heroes of Valor?" & vbCrLf _
               & "The current version will be replaced.", vbYesNo + vbQuestion, "Update Confirmation")
 
 If result = vbNo Then
-    WshShell.Popup "Update cancelled..", 5, "Update Cancelled", vbInformation
+    WshShell.Popup "Update canceled.", 5, "Update Canceled", vbInformation
     WScript.Quit
 End If
 
