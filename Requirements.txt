@@ -1,6 +1,0 @@
-Requirements for Setup GUI.py
-
-Python Environment:
-
-Python 3.x
-PyQt5 library (pip install PyQt5).
