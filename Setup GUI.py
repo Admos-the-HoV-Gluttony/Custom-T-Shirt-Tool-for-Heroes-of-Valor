@@ -84,19 +84,17 @@ class MainWindow(QMainWindow):
                 button.clicked.connect(lambda: self.button_clicked(button_text))
                 layout.addWidget(button)
             elif name == "Setup Menu":
-                # First Button
+                
                 button1_text = "DL and Extract 'repak v0.2.2'"
                 button1 = QPushButton(button1_text)
                 button1.clicked.connect(lambda: self.button_clicked(button1_text))  
                 layout.addWidget(button1)
 
-                # Second Button
                 button2_text = "DL, Extract and Fix 'UE4 DDS Tools v0.6.1'"
                 button2 = QPushButton(button2_text)
                 button2.clicked.connect(lambda: self.button_clicked(button2_text))  
                 layout.addWidget(button2)
 
-                # Third Button
                 button3_text = "Set Path to Game Files"
                 button3 = QPushButton(button3_text)
                 button3.clicked.connect(lambda: self.button_clicked(button3_text))  
