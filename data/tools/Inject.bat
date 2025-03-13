@@ -11,8 +11,10 @@ set "uassetList[5]=data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfV
 set "uassetList[6]=data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor\HeroesOfValor\Content\Textures\CosmeticItems\T_Shirt_Wolf.uasset"
 set "uassetList[7]=data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor\HeroesOfValor\Content\Textures\CosmeticItems\T_Shirt_Playtest_Axis.uasset"
 set "uassetList[8]=data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor\HeroesOfValor\Content\Textures\CosmeticItems\T_Shirt_Playtest_Allied.uasset"
+set "uassetList[9]=data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor\HeroesOfValor\Content\Textures\CosmeticItems\T_AlliesFTWShirt.uexp"
+set "uassetList[10]=data\Imported Game Files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor\HeroesOfValor\Content\Textures\CosmeticItems\T_AlliesFTWShirt.uasset"
 
-for /L %%i in (1,1,8) do (
+for /L %%i in (1,1,10) do (
     set /a count+=1
 )
 
