@@ -109,11 +109,17 @@ class MainWindow(QMainWindow):
                 button2.clicked.connect(lambda: self.button_clicked(button2_text))  
                 layout.addWidget(button2)
 
-                button3_text = "Set Path to Game Files"
-                button3 = QPushButton(button3_text)
-                button3.setFixedHeight(50)
-                button3.clicked.connect(lambda: self.button_clicked(button3_text))  
-                layout.addWidget(button3)
+                h_layout_game_path = QHBoxLayout()
+                label_game_path = QLabel("Path to Game Files")
+                self.game_path_textbox = QLineEdit()  
+                game_file_button = QPushButton(QIcon("data/icons/folder.png"), "")
+                game_file_button.setFixedHeight(25)
+                game_file_button.clicked.connect(self.open_set_path_dialog)  
+                h_layout_game_path.addWidget(label_game_path)
+                h_layout_game_path.addWidget(self.game_path_textbox)
+                h_layout_game_path.addWidget(game_file_button)
+                layout.addLayout(h_layout_game_path)
+
             else:
                 button_text = name
                 button = QPushButton(button_text)
@@ -124,9 +130,14 @@ class MainWindow(QMainWindow):
             self.page_selector.addTab(page, name)
 
     def open_file_dialog(self):
-        file_path, _ = QFileDialog.getOpenFileName(self, "Select Texture File", "", "Image Files (*.png *.jpg *.bmp)")
+        file_path, _ = QFileDialog.getOpenFileName(self, "Select Texture File", "", "Image Files (*.png *.jpg *.bmp *.dds *.hdr *.tga)")
         if file_path:
             self.texture_path_textbox.setText(file_path)
+
+    def open_set_path_dialog(self):  
+        dir_path = QFileDialog.getExistingDirectory(self, "Select Game Files Directory")
+        if dir_path:
+            self.game_path_textbox.setText(dir_path)
 
     def button_clicked(self, button_name):
         message = f"Button '{button_name}' clicked. Functionality is still under development."
