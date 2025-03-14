@@ -7,7 +7,7 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Custom T-Shirt Tool GUI")
-        self.setGeometry(100, 100, 720, 480) 
+        self.setGeometry(100, 100, 720, 480)
 
         main_layout = QHBoxLayout()
 
@@ -34,6 +34,7 @@ class MainWindow(QMainWindow):
             if name == "Texture Converter":
                 button_text = "Inject Texture"
                 button = QPushButton(button_text)
+                button.setFixedHeight(50)
                 button.clicked.connect(lambda: self.button_clicked(button_text))
                 layout.addWidget(button)
 
@@ -57,6 +58,7 @@ class MainWindow(QMainWindow):
                 label3 = QLabel("Path to new Texture")
                 self.texture_path_textbox = QLineEdit()
                 file_button = QPushButton(QIcon("data/icons/folder.png"), "")
+                file_button.setFixedHeight(25)
                 file_button.clicked.connect(self.open_file_dialog)
                 h_layout3.addWidget(label3)
                 h_layout3.addWidget(self.texture_path_textbox)
@@ -64,48 +66,58 @@ class MainWindow(QMainWindow):
                 layout.addLayout(h_layout3)
             elif name == "Packaging Tools":
                 button_import = QPushButton("Import Game Files")
-                button_import.clicked.connect(lambda: self.button_clicked("Import Game Files"))  
+                button_import.setFixedHeight(50)
+                button_import.clicked.connect(lambda: self.button_clicked("Import Game Files"))
                 layout.addWidget(button_import)
 
                 button_unpackage = QPushButton("Unpackage Game Files")
+                button_unpackage.setFixedHeight(50)
                 button_unpackage.clicked.connect(lambda: self.button_clicked("Unpackage Game Files"))
                 layout.addWidget(button_unpackage)
 
                 button_repackage = QPushButton("Repackage Game Files")
+                button_repackage.setFixedHeight(50)
                 button_repackage.clicked.connect(lambda: self.button_clicked("Repackage Game Files"))  
                 layout.addWidget(button_repackage)
 
                 button_remove_unpacked = QPushButton("Remove Unpackaged Game Files")
+                button_remove_unpacked.setFixedHeight(50)
                 button_remove_unpacked.clicked.connect(lambda: self.button_clicked("Remove Unpackaged Game Files"))  
                 layout.addWidget(button_remove_unpacked)
 
                 button_export = QPushButton("Export Game Files")
+                button_export.setFixedHeight(50)
                 button_export.clicked.connect(lambda: self.button_clicked("Export Game Files"))  
                 layout.addWidget(button_export)
             elif name == "Test Environment":
                 button_text = "Run Test Environment"
                 button = QPushButton(button_text)
+                button.setFixedHeight(50)
                 button.clicked.connect(lambda: self.button_clicked(button_text))
                 layout.addWidget(button)
             elif name == "Setup Menu":
                 
                 button1_text = "DL and Extract 'repak v0.2.2'"
                 button1 = QPushButton(button1_text)
+                button1.setFixedHeight(50)
                 button1.clicked.connect(lambda: self.button_clicked(button1_text))  
                 layout.addWidget(button1)
 
                 button2_text = "DL, Extract and Fix 'UE4 DDS Tools v0.6.1'"
                 button2 = QPushButton(button2_text)
+                button2.setFixedHeight(50)
                 button2.clicked.connect(lambda: self.button_clicked(button2_text))  
                 layout.addWidget(button2)
 
                 button3_text = "Set Path to Game Files"
                 button3 = QPushButton(button3_text)
+                button3.setFixedHeight(50)
                 button3.clicked.connect(lambda: self.button_clicked(button3_text))  
                 layout.addWidget(button3)
             else:
                 button_text = name
                 button = QPushButton(button_text)
+                button.setFixedHeight(50)
                 button.clicked.connect(lambda: self.button_clicked(button_text))
                 layout.addWidget(button)
 
