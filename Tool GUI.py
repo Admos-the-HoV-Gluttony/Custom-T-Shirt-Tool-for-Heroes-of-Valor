@@ -49,7 +49,7 @@ class MainWindow(QMainWindow):
                 h_layout2 = QHBoxLayout()
                 label2 = QLabel("Image Filter for Mipmap Generation")
                 combobox2 = QComboBox()
-                combobox2.addItems(["Cubic", "Linear", "Point", "None"])
+                combobox2.addItems(["Cubic (Recommended)", "Linear", "Point", "None"])
                 h_layout2.addWidget(label2)
                 h_layout2.addWidget(combobox2)
                 layout.addLayout(h_layout2)
