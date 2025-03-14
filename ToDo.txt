@@ -49,8 +49,6 @@ Low Priority:
 
 - Add menu entry for explaining the benefits and downsides of different image file types
 
-- Clean up visual inconsistencies
-
 - Automatic Detection of Shirt Uassets, ignore list for unused
 
 - Support for other Cosmetics
@@ -60,6 +58,6 @@ Eventually:
 
 - Replacing repak with something that supports OODLE
 
-- Re-Writing in likely Python, unlikely JS or Rust
+- Re-Writing in likely Python
 
 - Linux Support because Windows just bad
