@@ -1,5 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QTextEdit, QVBoxLayout, QWidget, QHBoxLayout, QPushButton, QComboBox, QLineEdit, QLabel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QTextEdit, QVBoxLayout, QWidget, QHBoxLayout, QPushButton, QComboBox, QLineEdit, QLabel, QFileDialog
+from PyQt5.QtGui import QIcon
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -39,7 +40,7 @@ class MainWindow(QMainWindow):
                 h_layout1 = QHBoxLayout()
                 label1 = QLabel("Choose T-Shirt to Overwrite")
                 combobox1 = QComboBox()
-                combobox1.addItems(["Night Camo", "Green Camo", "Frankenstein", "Dracula", "Banana", "Wolf", "Paytest Axis", "Playtest Allied", "FTW Axis", "FTW Allied"])
+                combobox1.addItems(["Night Camo", "Green Camo", "Frankenstein", "Dracula", "Wolf", "Banana", "Paytest Axis", "Playtest Allied", "FTW Axis", "FTW Allied"])
                 h_layout1.addWidget(label1)
                 h_layout1.addWidget(combobox1)
                 layout.addLayout(h_layout1)
@@ -54,9 +55,12 @@ class MainWindow(QMainWindow):
 
                 h_layout3 = QHBoxLayout()
                 label3 = QLabel("Path to new Texture")
-                textbox = QLineEdit()
+                self.texture_path_textbox = QLineEdit()
+                file_button = QPushButton(QIcon("data/icons/folder.png"), "")
+                file_button.clicked.connect(self.open_file_dialog)
                 h_layout3.addWidget(label3)
-                h_layout3.addWidget(textbox)
+                h_layout3.addWidget(self.texture_path_textbox)
+                h_layout3.addWidget(file_button)
                 layout.addLayout(h_layout3)
             elif name == "Packaging Tools":
                 button_import = QPushButton("Import Game Files")
@@ -106,6 +110,11 @@ class MainWindow(QMainWindow):
                 layout.addWidget(button)
 
             self.page_selector.addTab(page, name)
+
+    def open_file_dialog(self):
+        file_path, _ = QFileDialog.getOpenFileName(self, "Select Texture File", "", "Image Files (*.png *.jpg *.bmp)")
+        if file_path:
+            self.texture_path_textbox.setText(file_path)
 
     def button_clicked(self, button_name):
         message = f"Button '{button_name}' clicked. Functionality is still under development."
