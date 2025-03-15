@@ -1,11 +1,12 @@
 import os
 import json
 import logging
+import shutil
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def check_game_files(game_path):
-    exe_subpath = os.path.join("HeroesOfValor", "HeroesOfValor.exe")
+    exe_subpath = os.path.join("HeroesOfValor.exe")
     pak_subpath = os.path.join("HeroesOfValor", "Content", "Paks", "HeroesOfValor-WindowsNoEditor.pak")
 
     exe_path = os.path.join(game_path, exe_subpath)
@@ -16,6 +17,31 @@ def check_game_files(game_path):
 
     if os.path.exists(exe_path) and os.path.exists(pak_path):
         logging.info("Both 'HeroesOfValor.exe' and 'HeroesOfValor-WindowsNoEditor.pak' have been found.")
+
+        script_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        dest_dir = os.path.join(script_dir, "game_files")
+        
+        logging.info(f"Copying game files to: {dest_dir}")
+        
+        if not os.path.exists(dest_dir):
+            logging.info("Destination directory does not exist. Creating it now.")
+            os.makedirs(dest_dir)
+
+        try:
+            for item in os.listdir(game_path):
+                source = os.path.join(game_path, item)
+                destination = os.path.join(dest_dir, item)
+                
+                if os.path.isfile(source) or os.path.islink(source):
+                    shutil.copy2(source, destination)
+                    logging.info(f"Copied: {source} to {destination}")
+                elif os.path.isdir(source):
+                    shutil.copytree(source, destination)
+                    logging.info(f"Copied directory: {source} to {destination}")
+        
+        except Exception as e:
+            logging.error(f"Failed to copy files: {e}")
+    
     else:
         missing_files = []
         if not os.path.exists(exe_path):
