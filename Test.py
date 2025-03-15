@@ -1,7 +1,11 @@
 import sys
 import os
+import json
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QTextEdit, QVBoxLayout, QWidget, QHBoxLayout, QPushButton, QComboBox, QLineEdit, QLabel, QFileDialog, QMessageBox, QCheckBox
 from PyQt5.QtGui import QIcon
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -74,7 +78,7 @@ class MainWindow(QMainWindow):
             elif name == "Packaging Tools":
                 button_import = QPushButton("Import Game Files")
                 button_import.setFixedHeight(50)
-                button_import.clicked.connect(lambda: self.button_clicked("Import Game Files"))
+                button_import.clicked.connect(lambda: self.import_game_files())
                 layout.addWidget(button_import)
 
                 button_unpackage = QPushButton("Unpackage Game Files")
@@ -145,7 +149,6 @@ class MainWindow(QMainWindow):
         dir_path = QFileDialog.getExistingDirectory(self, "Select Game Files Directory")
         if dir_path:
             self.game_path_textbox.setText(dir_path)
-
             self.save_game_path(dir_path)
 
     def button_clicked(self, button_name):
@@ -187,25 +190,27 @@ class MainWindow(QMainWindow):
                 self.terminal.append(f"Failed to download and extract 'UE4 DDS Tools v0.6.1'. Error: {e.stderr}")
 
     def load_game_path(self):
-        config_file = "data/config/game_path.txt"
+        config_file = "data/config/settings.json"
         if os.path.exists(config_file):
             with open(config_file, "r") as file:
-                game_path = file.read().strip()
-                self.game_path_textbox.setText(game_path)
-                return game_path
+                config_data = json.load(file)
+                game_path = config_data.get("game_path")
+                if game_path:
+                    self.game_path_textbox.setText(game_path)
+                    return game_path
         else:
-            self.terminal.append("Game path configuration file not found.")
-            return None
+            self.terminal.append("Configuration file not found.")
+        return None
 
     def save_game_path(self, path):
-        config_dir = os.path.dirname(config_file := "data/config/game_path.txt")
+        config_dir = os.path.dirname(config_file := "data/config/settings.json")
         if not os.path.exists(config_dir):
             os.makedirs(config_dir)
         
-        quoted_path = f'"{path}"'
+        config_data = {"game_path": path}
         
         with open(config_file, "w") as file:
-            file.write(quoted_path)
+            json.dump(config_data, file, indent=4)
         
         self.terminal.append(f"Path saved to {config_file}")
 
@@ -220,10 +225,86 @@ class MainWindow(QMainWindow):
         else:
             self.terminal.append("Invalid path provided.")
 
-if __name__ == "__main__":
-    import sys
-    import os
+    def check_game_files(self, game_path):
+        exe_subpath = os.path.join("HeroesOfValor.exe")
+        pak_subpath = os.path.join("HeroesOfValor", "Content", "Paks", "HeroesOfValor-WindowsNoEditor.pak")
 
+        exe_path = os.path.join(game_path, exe_subpath)
+        pak_path = os.path.join(game_path, pak_subpath)
+
+        logging.info(f"Checking for 'HeroesOfValor.exe' at: {exe_path}")
+        logging.info(f"Checking for 'HeroesOfValor-WindowsNoEditor.pak' at: {pak_path}")
+
+        if os.path.exists(exe_path) and os.path.exists(pak_path):
+            logging.info("Both 'HeroesOfValor.exe' and 'HeroesOfValor-WindowsNoEditor.pak' have been found.")
+            return True
+        else:
+            missing_files = []
+            if not os.path.exists(exe_path):
+                missing_files.append(f"'{exe_subpath}'")
+            if not os.path.exists(pak_path):
+                missing_files.append(f"'{pak_subpath}'")
+            
+            logging.error(f"Missing files: {', '.join(missing_files)}")
+            self.terminal.append(f"Missing files: {', '.join(missing_files)}")
+            return False
+
+    def import_game_files(self):
+        config_file_path = "data\\config\\settings.json"
+        
+        if not os.path.exists(config_file_path):
+            logging.error(f"The configuration file '{config_file_path}' does not exist.")
+            self.terminal.append(f"The configuration file '{config_file_path}' does not exist.")
+            return
+
+        try:
+            with open(config_file_path, 'r') as config_file:
+                config_data = json.load(config_file)
+                game_path = config_data.get("game_path", "").strip()
+            
+            if not game_path or not os.path.exists(game_path):
+                logging.error(f"The specified game path '{game_path}' does not exist.")
+                self.terminal.append(f"The specified game path '{game_path}' does not exist.")
+                return
+
+            if not self.check_game_files(game_path):
+                return
+            
+            reply = QMessageBox.question(self, 'Confirmation', 
+                                         "Do you want to import the game files?",
+                                         QMessageBox.Yes | QMessageBox.No,
+                                         QMessageBox.No)
+            
+            if reply == QMessageBox.Yes:
+                import subprocess
+                try:
+                    result = subprocess.run(
+                        ["python", "data\\scripts\\import.pyw"],
+                        capture_output=True, text=True, check=True
+                    )
+
+                    if result.returncode != 0:
+                        self.terminal.append(f"Failed to import game files. Error: {result.stderr}")
+                    else:
+                        self.terminal.append("Game files imported successfully.")
+                
+                except subprocess.CalledProcessError as e:
+                    self.terminal.append(f"Failed to import game files. Error: {e.stderr}")
+
+        except FileNotFoundError:
+            logging.error(f"File not found: {config_file_path}")
+            self.terminal.append(f"File not found: {config_file_path}")
+        except PermissionError:
+            logging.error(f"Permission denied for reading the file: {config_file_path}")
+            self.terminal.append(f"Permission denied for reading the file: {config_file_path}")
+        except json.JSONDecodeError as e:
+            logging.error(f"Failed to decode JSON from '{config_file_path}': {e}")
+            self.terminal.append(f"Failed to decode JSON from '{config_file_path}': {e}")
+        except Exception as e:
+            logging.error(f"An unexpected error occurred: {e}")
+            self.terminal.append(f"An unexpected error occurred: {e}")
+
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
