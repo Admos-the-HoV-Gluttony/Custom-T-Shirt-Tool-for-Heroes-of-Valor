@@ -161,10 +161,13 @@ class MainWindow(QMainWindow):
         if reply == QMessageBox.Yes:
             import subprocess
             try:
-                subprocess.run(["python", "data\\scripts\\dl_repak.pyw"])
+                result = subprocess.run(
+                    ["python", "data\\scripts\\dl_repak.pyw"],
+                    capture_output=True, text=True, check=True
+                )
                 self.terminal.append("Download and extraction of 'repak v0.2.2' completed successfully.")
-            except Exception as e:
-                self.terminal.append(f"Failed to download and extract 'repak v0.2.2'. Error: {e}")
+            except subprocess.CalledProcessError as e:
+                self.terminal.append(f"Failed to download and extract 'repak v0.2.2'. Error: {e.stderr}")
 
     def download_and_extract_dds_tools(self):
         reply = QMessageBox.question(self, 'Confirmation', 
@@ -175,10 +178,13 @@ class MainWindow(QMainWindow):
         if reply == QMessageBox.Yes:
             import subprocess
             try:
-                subprocess.run(["python", "data\\scripts\\dl_ue4_dds_tools.pyw"])
+                result = subprocess.run(
+                    ["python", "data\\scripts\\dl_ue4_dds_tools.pyw"],
+                    capture_output=True, text=True, check=True
+                )
                 self.terminal.append("Download and extraction of 'UE4 DDS Tools v0.6.1' completed successfully.")
-            except Exception as e:
-                self.terminal.append(f"Failed to download and extract 'UE4 DDS Tools v0.6.1'. Error: {e}")
+            except subprocess.CalledProcessError as e:
+                self.terminal.append(f"Failed to download and extract 'UE4 DDS Tools v0.6.1'. Error: {e.stderr}")
 
     def load_game_path(self):
         config_file = "data/config/game_path.txt"
