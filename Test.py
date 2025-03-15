@@ -1,4 +1,5 @@
 import sys
+import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QTextEdit, QVBoxLayout, QWidget, QHBoxLayout, QPushButton, QComboBox, QLineEdit, QLabel, QFileDialog, QMessageBox, QCheckBox
 from PyQt5.QtGui import QIcon
 
@@ -24,6 +25,8 @@ class MainWindow(QMainWindow):
         central_widget = QWidget()
         central_widget.setLayout(main_layout)
         self.setCentralWidget(central_widget)
+
+        self.game_path_textbox.textChanged.connect(self.on_game_path_changed)
 
     def create_pages(self):
         page_names = ["Texture Converter", "Packaging Tools", "Test Environment", "Setup Menu"]
@@ -143,6 +146,8 @@ class MainWindow(QMainWindow):
         if dir_path:
             self.game_path_textbox.setText(dir_path)
 
+            self.save_game_path(dir_path)
+
     def button_clicked(self, button_name):
         message = f"Button '{button_name}' clicked. Functionality is still under development."
         self.terminal.append(message)
@@ -175,8 +180,48 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 self.terminal.append(f"Failed to download and extract 'UE4 DDS Tools v0.6.1'. Error: {e}")
 
+    def load_game_path(self):
+        config_file = "data/config/game_path.txt"
+        if os.path.exists(config_file):
+            with open(config_file, "r") as file:
+                game_path = file.read().strip()
+                self.game_path_textbox.setText(game_path)
+                return game_path
+        else:
+            self.terminal.append("Game path configuration file not found.")
+            return None
+
+    def save_game_path(self, path):
+        config_dir = os.path.dirname(config_file := "data/config/game_path.txt")
+        if not os.path.exists(config_dir):
+            os.makedirs(config_dir)
+        
+        quoted_path = f'"{path}"'
+        
+        with open(config_file, "w") as file:
+            file.write(quoted_path)
+        
+        self.terminal.append(f"Path saved to {config_file}")
+
+    def is_valid_path(self, path):
+        return os.path.isdir(path)
+
+    def on_game_path_changed(self, new_path):
+        stripped_path = new_path.strip('\'"')
+        
+        if self.is_valid_path(stripped_path):
+            self.save_game_path(stripped_path)
+        else:
+            self.terminal.append("Invalid path provided.")
+
 if __name__ == "__main__":
+    import sys
+    import os
+
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
+
+    window.load_game_path()
+
     sys.exit(app.exec_())
