@@ -15,3 +15,5 @@ logfiles, again
 support for more items, additional category and maybe team filter
 
 check selected texture, reject if not power of two
+
+maybe more modularity for easier tool swaps down the line
