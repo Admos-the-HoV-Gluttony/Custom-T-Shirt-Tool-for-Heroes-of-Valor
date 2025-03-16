@@ -10,10 +10,10 @@ colour_loopup = {
 }
 
 line_start_character = ">"
-terminal_theme = "dark"
 
 class Terminal:
     terminal_window: QTextEdit
+    terminal_theme = "dark"
 
     def __init__(self):
         self.terminal_window = QTextEdit()
@@ -23,13 +23,16 @@ class Terminal:
         self.__output(text)
 
     def warn(self, text: str):
-        self.__output("<font color=\"#" + colour_loopup[terminal_theme]["warn"] + "\">[WARN]:</font> " + text)
+        self.__output("<font color=\"#" + colour_loopup[self.terminal_theme]["warn"] + "\">[WARN]:</font> " + text)
 
     def error(self, text: str):
-        self.__output("<font color=\"#" + colour_loopup[terminal_theme]["error"] + "\">[ERROR]:</font> " + text)
+        self.__output("<font color=\"#" + colour_loopup[self.terminal_theme]["error"] + "\">[ERROR]:</font> " + text)
 
     def debug(self, text: str):
-        self.__output("<font color=\"#" + colour_loopup[terminal_theme]["debug"] + "\">[DEBUG]:</font> " + text)
+        self.__output("<font color=\"#" + colour_loopup[self.terminal_theme]["debug"] + "\">[DEBUG]:</font> " + text)
+
+    def setTheme(self, theme: str):
+        self.terminal_theme = theme
 
     def __output(self, text: str):
         self.terminal_window.append(line_start_character + " " + text)
