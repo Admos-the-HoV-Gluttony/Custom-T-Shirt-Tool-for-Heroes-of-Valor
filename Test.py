@@ -3,9 +3,11 @@ import os
 import json
 import logging  
 import subprocess
-from PyQt6.QtWidgets import QApplication, QMainWindow, QTabWidget, QTextEdit, QVBoxLayout, QWidget, QHBoxLayout, QPushButton, QComboBox, QLineEdit, QLabel, QFileDialog, QMessageBox, QCheckBox
+from PyQt6.QtWidgets import QApplication, QMainWindow, QTabWidget, QTextEdit, QVBoxLayout, QWidget, QHBoxLayout, QPushButton, QLineEdit, QLabel, QFileDialog, QMessageBox
 from PyQt6.QtGui import QIcon
 import shutil
+
+from src.HelperFunctions import create_QHBox, create_push_button, create_checkbox
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -42,29 +44,12 @@ class MainWindow(QMainWindow):
             
             if name == "Texture Converter":
                 button_text = "Inject Texture"
-                button = QPushButton(button_text)
-                button.setFixedHeight(50)
-                button.clicked.connect(lambda: self.button_clicked(button_text))
-                layout.addWidget(button)
+                layout.addWidget(create_push_button(button_text, lambda: self.button_clicked(button_text)))
 
-                h_layout1 = QHBoxLayout()
-                label1 = QLabel("Choose T-Shirt to Overwrite")
-                combobox1 = QComboBox()
-                combobox1.addItems(["Night Camo", "Green Camo", "Frankenstein", "Dracula", "Wolf", "Banana", "Paytest Axis", "Playtest Allied", "FTW Axis", "FTW Allied"])
-                h_layout1.addWidget(label1)
-                h_layout1.addWidget(combobox1)
-                layout.addLayout(h_layout1)
+                layout.addLayout(create_QHBox("Choose T-Shirt to Overwrite", ["Night Camo", "Green Camo", "Frankenstein", "Dracula", "Wolf", "Banana", "Paytest Axis", "Playtest Allied", "FTW Axis", "FTW Allied"]))
+                layout.addLayout(create_QHBox("Image Filter for Mipmap Generation", ["Cubic", "Linear", "Point", "None"]))
 
-                h_layout2 = QHBoxLayout()
-                label2 = QLabel("Image Filter for Mipmap Generation")
-                combobox2 = QComboBox()
-                combobox2.addItems(["Cubic", "Linear", "Point", "None"])
-                h_layout2.addWidget(label2)
-                h_layout2.addWidget(combobox2)
-                layout.addLayout(h_layout2)
-
-                self.skip_mipmap_checkbox = QCheckBox("Skip Mipmap Generation")
-                self.skip_mipmap_checkbox.setChecked(False)
+                self.skip_mipmap_checkbox = create_checkbox("Skip Mipmap Generation", False)
                 layout.addWidget(self.skip_mipmap_checkbox)
 
                 h_layout3 = QHBoxLayout()
@@ -78,49 +63,16 @@ class MainWindow(QMainWindow):
                 h_layout3.addWidget(file_button)
                 layout.addLayout(h_layout3)
             elif name == "Packaging Tools":
-                button_import = QPushButton("Import Game Files")
-                button_import.setFixedHeight(50)
-                button_import.clicked.connect(lambda: self.import_game_files())
-                layout.addWidget(button_import)
-
-                button_unpackage = QPushButton("Unpackage Game Files")
-                button_unpackage.setFixedHeight(50)
-                button_unpackage.clicked.connect(self.unpackage_game_files)
-                layout.addWidget(button_unpackage)
-
-                button_repackage = QPushButton("Repackage Game Files")
-                button_repackage.setFixedHeight(50)
-                button_repackage.clicked.connect(lambda: self.button_clicked("Repackage Game Files"))  
-                layout.addWidget(button_repackage)
-
-                button_remove_unpacked = QPushButton("Remove Unpackaged Game Files")
-                button_remove_unpacked.setFixedHeight(50)
-                button_remove_unpacked.clicked.connect(self.remove_unpacked_game_files)  
-                layout.addWidget(button_remove_unpacked)
-
-                button_export = QPushButton("Export Game Files")
-                button_export.setFixedHeight(50)
-                button_export.clicked.connect(self.export_game_files)
-                layout.addWidget(button_export)
+                layout.addWidget(create_push_button("Import Game Files", lambda: self.import_game_files()))
+                layout.addWidget(create_push_button("Unpackage Game Files", self.unpackage_game_files))
+                layout.addWidget(create_push_button("Repackage Game Files", lambda: self.button_clicked("Repackage Game Files")))
+                layout.addWidget(create_push_button("Remove Unpackaged Game Files", self.remove_unpacked_game_files))
+                layout.addWidget(create_push_button("Export Game Files", self.export_game_files))
             elif name == "Test Environment":
-                button_text = "Run Test Environment"
-                button = QPushButton(button_text)
-                button.setFixedHeight(50)
-                button.clicked.connect(self.run_test_environment) 
-                layout.addWidget(button)
+                layout.addWidget(create_push_button("Run Test Environment", self.run_test_environment))
             elif name == "Setup Menu":
-                
-                button1_text = "DL and Extract 'repak v0.2.2'"
-                button1 = QPushButton(button1_text)
-                button1.setFixedHeight(50)
-                button1.clicked.connect(lambda: self.download_and_extract_repak())
-                layout.addWidget(button1)
-
-                button2_text = "DL, Extract and Fix 'UE4 DDS Tools v0.6.1'"
-                button2 = QPushButton(button2_text)
-                button2.setFixedHeight(50)
-                button2.clicked.connect(lambda: self.download_and_extract_dds_tools())  
-                layout.addWidget(button2)
+                layout.addWidget(create_push_button("DL and Extract 'repak v0.2.2'", lambda: self.download_and_extract_repak()))
+                layout.addWidget(create_push_button("DL, Extract and Fix 'UE4 DDS Tools v0.6.1'", lambda: self.download_and_extract_dds_tools()))
 
                 h_layout_game_path = QHBoxLayout()
                 label_game_path = QLabel("Path to Game Files")
@@ -134,11 +86,7 @@ class MainWindow(QMainWindow):
                 layout.addLayout(h_layout_game_path)
 
             else:
-                button_text = name
-                button = QPushButton(button_text)
-                button.setFixedHeight(50)
-                button.clicked.connect(lambda: self.button_clicked(button_text))
-                layout.addWidget(button)
+                layout.addWidget(create_push_button(name, lambda: self.button_clicked(name)))
 
             self.page_selector.addTab(page, name)
 
