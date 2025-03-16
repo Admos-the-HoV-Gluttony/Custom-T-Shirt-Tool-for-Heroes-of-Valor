@@ -1,0 +1,17 @@
+-no specific order
+
+remove completion pop up from "DL and Extract 'repak v0.2.2'
+
+prevent additional terminal from opening, appear at least after DL and Import
+
+replace boring paths with cool enviornment variables
+
+make inject do stuff
+
+fixed window size or smarter scaling
+
+logfiles, again
+
+support for more items, additional category and maybe team filter
+
+check selected texture, reject if not power of two
