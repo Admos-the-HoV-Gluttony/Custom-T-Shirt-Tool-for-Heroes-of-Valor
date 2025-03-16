@@ -6,8 +6,7 @@
 
 ## Usage
 
-Very Basic Video Tutorial. It is still recommended to read the README.
-https://youtu.be/GEjUI7NKBX8
+There is a very basic video tutorial available [here](https://youtu.be/GEjUI7NKBX8) however it is still recommended to read this README.
 
 To use the tool you will need to make use of the following scripts found in the main folder:
 
