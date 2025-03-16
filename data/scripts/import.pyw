@@ -33,9 +33,11 @@ def check_game_files(game_path):
                 destination = os.path.join(dest_dir, item)
                 
                 if os.path.isfile(source) or os.path.islink(source):
-                    shutil.copy2(source, destination)
-                    logging.info(f"Copied: {source} to {destination}")
+                    shutil.copy2(source, destination, follow_symlinks=True)
+                    logging.info(f"Overwritten: {source} to {destination}")
                 elif os.path.isdir(source):
+                    if os.path.exists(destination):
+                        shutil.rmtree(destination)
                     shutil.copytree(source, destination)
                     logging.info(f"Copied directory: {source} to {destination}")
         
@@ -52,7 +54,7 @@ def check_game_files(game_path):
         logging.error(f"Missing files: {', '.join(missing_files)}")
 
 def main():
-    config_file_path = "data\\config\\settings.json"
+    config_file_path = "data\\config\\path_to_game_files.json"
     
     if not os.path.exists(config_file_path):
         logging.error(f"The configuration file '{config_file_path}' does not exist.")
