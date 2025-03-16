@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QTextEdit
 
-# Fill out once dark mode hookup works so that colours flip correctly when switching between light and dark
+# TODO : Fill out once dark mode hookup works so that colours flip correctly when switching between light and dark
 colour_loopup = {
     "dark" : {
         "warn" : "FFC300",
@@ -11,13 +11,14 @@ colour_loopup = {
 
 line_start_character = ">"
 
-class Terminal:
+class TerminalWindow:
     terminal_window: QTextEdit
     terminal_theme = "dark"
 
-    def __init__(self):
+    def setup_window(self):
         self.terminal_window = QTextEdit()
         self.terminal_window.setReadOnly(True)
+        return self.terminal_window # Just makes the widget add cleaner
 
     def log(self, text: str):
         self.__output(text)

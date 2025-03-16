@@ -7,8 +7,8 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QTabWidget, QTextEdit, QV
 from PyQt6.QtGui import QIcon
 import shutil
 
+from src.Globals import Terminal
 from src.HelperFunctions import create_QHBox, create_push_button, create_checkbox
-from src.Terminal import Terminal
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -21,14 +21,11 @@ class MainWindow(QMainWindow):
 
         main_layout = QHBoxLayout()
 
-        self.terminal = Terminal()
-
         self.page_selector = QTabWidget()
         self.page_selector.setFixedWidth(300)
         self.create_pages()
-
         main_layout.addWidget(self.page_selector)
-        main_layout.addWidget(self.terminal.terminal_window)
+        main_layout.addWidget(Terminal.setup_window())
 
         central_widget = QWidget()
         central_widget.setLayout(main_layout)
@@ -107,7 +104,7 @@ class MainWindow(QMainWindow):
             pak_folder_path = r"data\game_files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor"
             
             if not os.path.exists(pak_folder_path):
-                self.terminal.error("The directory 'HeroesOfValor-WindowsNoEditor' is missing.")
+                Terminal.error("The directory 'HeroesOfValor-WindowsNoEditor' is missing.")
             else:
                 reply = QMessageBox.question(self, 'Confirmation', 
                                              "Do you want to repackage the game files? This may take a while",
@@ -124,24 +121,24 @@ class MainWindow(QMainWindow):
                             stderr=subprocess.PIPE,  
                             creationflags=subprocess.CREATE_NO_WINDOW 
                         )
-                        self.terminal.log("The game files have been successfully repackaged.")
+                        Terminal.log("The game files have been successfully repackaged.")
                         if result.stderr:
-                            self.terminal.error(result.stderr.decode())
+                            Terminal.error(result.stderr.decode())
                         if result.stdout:
-                            self.terminal.log(result.stdout.decode())
+                            Terminal.log(result.stdout.decode())
                     except subprocess.CalledProcessError as e:
-                        self.terminal.error(f"An error occurred while repackaging the file: {e}")
+                        Terminal.error(f"An error occurred while repackaging the file: {e}")
                         if e.stderr:
-                            self.terminal.error(e.stderr.decode())
+                            Terminal.error(e.stderr.decode())
                         if e.stdout:
-                            self.terminal.log(e.stdout.decode())
+                            Terminal.log(e.stdout.decode())
                 else:
-                    self.terminal.log("Repack operation cancelled by user.")
+                    Terminal.log("Repack operation cancelled by user.")
         elif button_name == "Unpackage Game Files":
             pak_file_path = r"data\game_files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor.pak"
             
             if not os.path.exists(pak_file_path):
-                self.terminal.error("The file 'HeroesOfValor-WindowsNoEditor.pak' is missing.")
+                Terminal.error("The file 'HeroesOfValor-WindowsNoEditor.pak' is missing.")
             else:
                 reply = QMessageBox.question(self, 'Confirmation', 
                                              "Do you want to unpackage the game files? This may take a while",
@@ -158,30 +155,30 @@ class MainWindow(QMainWindow):
                             stderr=subprocess.PIPE, 
                             creationflags=subprocess.CREATE_NO_WINDOW  
                         )
-                        self.terminal.log("The file has been successfully unpacked.")
+                        Terminal.log("The file has been successfully unpacked.")
                         if result.stderr:
-                            self.terminal.error(result.stderr.decode())
+                            Terminal.error(result.stderr.decode())
                         if result.stdout:
-                            self.terminal.log(result.stdout.decode())
+                            Terminal.log(result.stdout.decode())
                     except subprocess.CalledProcessError as e:
-                        self.terminal.error(f"An error occurred while unpacking the file: {e}")
+                        Terminal.error(f"An error occurred while unpacking the file: {e}")
                         if e.stderr:
-                            self.terminal.error(e.stderr.decode())
+                            Terminal.error(e.stderr.decode())
                         if e.stdout:
-                            self.terminal.log(e.stdout.decode())
+                            Terminal.log(e.stdout.decode())
                 else:
-                    self.terminal.log("Unpack operation cancelled by user.")
+                    Terminal.log("Unpack operation cancelled by user.")
         elif button_name == "Remove Unpackaged Game Files":
             pass
         else:
             message = f"Button '{button_name}' clicked. Functionality is still under development."
-            self.terminal.log(message)
+            Terminal.log(message)
 
     def unpackage_game_files(self):
         pak_file_path = r"data\game_files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor.pak"
         
         if not os.path.exists(pak_file_path):
-            self.terminal.error("The file 'HeroesOfValor-WindowsNoEditor.pak' is missing.")
+            Terminal.error("The file 'HeroesOfValor-WindowsNoEditor.pak' is missing.")
         else:
             reply = QMessageBox.question(self, 'Confirmation', 
                                          "Do you want to unpackage the game files? This may take a while",
@@ -198,19 +195,19 @@ class MainWindow(QMainWindow):
                         stderr=subprocess.PIPE, 
                         creationflags=subprocess.CREATE_NO_WINDOW 
                     )
-                    self.terminal.log("The file has been successfully unpacked.")
+                    Terminal.log("The file has been successfully unpacked.")
                     if result.stderr:
-                        self.terminal.error(result.stderr.decode())
+                        Terminal.error(result.stderr.decode())
                     if result.stdout:
-                        self.terminal.log(result.stdout.decode())
+                        Terminal.log(result.stdout.decode())
                 except subprocess.CalledProcessError as e:
-                    self.terminal.error(f"An error occurred while unpacking the file: {e}")
+                    Terminal.error(f"An error occurred while unpacking the file: {e}")
                     if e.stderr:
-                        self.terminal.error(e.stderr.decode())
+                        Terminal.error(e.stderr.decode())
                     if e.stdout:
-                        self.terminal.log(e.stdout.decode())
+                        Terminal.log(e.stdout.decode())
             else:
-                self.terminal.log("Unpack operation cancelled by user.")
+                Terminal.log("Unpack operation cancelled by user.")
 
     def download_and_extract_repak(self):
         reply = QMessageBox.question(self, 'Confirmation', 
@@ -224,13 +221,13 @@ class MainWindow(QMainWindow):
                     ["python", "data\\scripts\\dl_repak.pyw"],
                     capture_output=True, text=True, check=True
                 )
-                self.terminal.log("Download and extraction of 'repak v0.2.2' completed successfully.")
+                Terminal.log("Download and extraction of 'repak v0.2.2' completed successfully.")
                 if result.stdout:
-                    self.terminal.log(result.stdout)
+                    Terminal.log(result.stdout)
             except subprocess.CalledProcessError as e:
-                self.terminal.error(f"Failed to download and extract 'repak v0.2.2'. Error: {e.stderr}")
+                Terminal.error(f"Failed to download and extract 'repak v0.2.2'. Error: {e.stderr}")
                 if e.stderr:
-                    self.terminal.error(e.stderr)
+                    Terminal.error(e.stderr)
 
     def download_and_extract_dds_tools(self):
         reply = QMessageBox.question(self, 'Confirmation', 
@@ -244,13 +241,13 @@ class MainWindow(QMainWindow):
                     ["python", "data\\scripts\\dl_ue4_dds_tools.pyw"],
                     capture_output=True, text=True, check=True
                 )
-                self.terminal.log("Download and extraction of 'UE4 DDS Tools v0.6.1' completed successfully.")
+                Terminal.log("Download and extraction of 'UE4 DDS Tools v0.6.1' completed successfully.")
                 if result.stdout:
-                    self.terminal.log(result.stdout)
+                    Terminal.log(result.stdout)
             except subprocess.CalledProcessError as e:
-                self.terminal.error(f"Failed to download and extract 'UE4 DDS Tools v0.6.1'. Error: {e.stderr}")
+                Terminal.error(f"Failed to download and extract 'UE4 DDS Tools v0.6.1'. Error: {e.stderr}")
                 if e.stderr:
-                    self.terminal.error(e.stderr)
+                    Terminal.error(e.stderr)
 
     def load_game_path(self):
         config_file = "data/config/path_to_game_files.json"
@@ -262,7 +259,7 @@ class MainWindow(QMainWindow):
                     self.game_path_textbox.setText(game_path)
                     return game_path
         else:
-            self.terminal.warn("Configuration file not found.")
+            Terminal.warn("Configuration file not found.")
         return None
 
     def save_game_path(self, path):
@@ -275,7 +272,7 @@ class MainWindow(QMainWindow):
         with open(config_file, "w") as file:
             json.dump(config_data, file, indent=4)
         
-        self.terminal.log(f"Path saved to {config_file}")
+        Terminal.log(f"Path saved to {config_file}")
 
     def is_valid_path(self, path):
         return os.path.isdir(path)
@@ -286,7 +283,7 @@ class MainWindow(QMainWindow):
         if self.is_valid_path(stripped_path):
             self.save_game_path(stripped_path)
         else:
-            self.terminal.warn("Invalid path provided.")
+            Terminal.warn("Invalid path provided.")
 
     def check_game_files(self, game_path):
         exe_subpath = os.path.join("HeroesOfValor.exe")
@@ -309,7 +306,7 @@ class MainWindow(QMainWindow):
                 missing_files.append(f"'{pak_subpath}'")
             
             logging.error(f"Missing files: {', '.join(missing_files)}")
-            self.terminal.error(f"Missing files: {', '.join(missing_files)}")
+            Terminal.error(f"Missing files: {', '.join(missing_files)}")
             return False
 
     def import_game_files(self):
@@ -317,7 +314,7 @@ class MainWindow(QMainWindow):
         
         if not os.path.exists(config_file_path):
             logging.error(f"The configuration file '{config_file_path}' does not exist.")
-            self.terminal.error(f"The configuration file '{config_file_path}' does not exist.")
+            Terminal.error(f"The configuration file '{config_file_path}' does not exist.")
             return
 
         try:
@@ -327,7 +324,7 @@ class MainWindow(QMainWindow):
             
             if not game_path or not os.path.exists(game_path):
                 logging.error(f"The specified game path '{game_path}' does not exist.")
-                self.terminal.error(f"The specified game path '{game_path}' does not exist.")
+                Terminal.error(f"The specified game path '{game_path}' does not exist.")
                 return
 
             if not self.check_game_files(game_path):
@@ -346,32 +343,32 @@ class MainWindow(QMainWindow):
                     )
 
                     if result.returncode != 0:
-                        self.terminal.error(f"Failed to import game files. {result.stderr}")
+                        Terminal.error(f"Failed to import game files. {result.stderr}")
                     else:
-                        self.terminal.log("Game files imported successfully.")
+                        Terminal.log("Game files imported successfully.")
                 
                 except subprocess.CalledProcessError as e:
-                    self.terminal.error(f"Failed to import game files. {e.stderr}")
+                    Terminal.error(f"Failed to import game files. {e.stderr}")
 
         except FileNotFoundError:
             logging.error(f"File not found: {config_file_path}")
-            self.terminal.error(f"File not found: {config_file_path}")
+            Terminal.error(f"File not found: {config_file_path}")
         except PermissionError:
             logging.error(f"Permission denied for reading the file: {config_file_path}")
-            self.terminal.error(f"Permission denied for reading the file: {config_file_path}")
+            Terminal.error(f"Permission denied for reading the file: {config_file_path}")
         except json.JSONDecodeError as e:
             logging.error(f"Failed to decode JSON from '{config_file_path}': {e}")
-            self.terminal.error(f"Failed to decode JSON from '{config_file_path}': {e}")
+            Terminal.error(f"Failed to decode JSON from '{config_file_path}': {e}")
         except Exception as e:
             logging.error(f"An unexpected error occurred: {e}")
-            self.terminal.error(f"An unexpected error occurred: {e}")
+            Terminal.error(f"An unexpected error occurred: {e}")
 
     def export_game_files(self):
         config_file_path = "data\\config\\path_to_game_files.json"
         
         if not os.path.exists(config_file_path):
             logging.error(f"The configuration file '{config_file_path}' does not exist.")
-            self.terminal.error(f"The configuration file '{config_file_path}' does not exist.")
+            Terminal.error(f"The configuration file '{config_file_path}' does not exist.")
             return
 
         try:
@@ -381,14 +378,14 @@ class MainWindow(QMainWindow):
             
             if not game_path or not os.path.exists(game_path):
                 logging.error(f"The specified game path '{game_path}' does not exist.")
-                self.terminal.error(f"The specified game path '{game_path}' does not exist.")
+                Terminal.error(f"The specified game path '{game_path}' does not exist.")
                 return
 
             modified_pak_path = "data\\game_files\\HeroesOfValor\\Content\\Paks\\HeroesOfValor-WindowsNoEditor.pak"
             
             if not os.path.exists(modified_pak_path):
                 logging.error(f"The modified pak file '{modified_pak_path}' does not exist.")
-                self.terminal.error(f"The modified pak file '{modified_pak_path}' does not exist.")
+                Terminal.error(f"The modified pak file '{modified_pak_path}' does not exist.")
                 return
 
             reply = QMessageBox.question(self, 'Confirmation', 
@@ -404,23 +401,23 @@ class MainWindow(QMainWindow):
 
                 try:
                     shutil.copy2(modified_pak_path, target_pak_path)
-                    self.terminal.log("Game files exported successfully.")
+                    Terminal.log("Game files exported successfully.")
                 except Exception as e:
                     logging.error(f"Failed to export game files: {e}")
-                    self.terminal.error(f"Failed to export game files: {e}")
+                    Terminal.error(f"Failed to export game files: {e}")
 
         except FileNotFoundError:
             logging.error(f"File not found: {config_file_path}")
-            self.terminal.error(f"File not found: {config_file_path}")
+            Terminal.error(f"File not found: {config_file_path}")
         except PermissionError:
             logging.error(f"Permission denied for reading the file: {config_file_path}")
-            self.terminal.error(f"Permission denied for reading the file: {config_file_path}")
+            Terminal.error(f"Permission denied for reading the file: {config_file_path}")
         except json.JSONDecodeError as e:
             logging.error(f"Failed to decode JSON from '{config_file_path}': {e}")
-            self.terminal.error(f"Failed to decode JSON from '{config_file_path}': {e}")
+            Terminal.error(f"Failed to decode JSON from '{config_file_path}': {e}")
         except Exception as e:
             logging.error(f"An unexpected error occurred: {e}")
-            self.terminal.error(f"An unexpected error occurred: {e}")
+            Terminal.error(f"An unexpected error occurred: {e}")
 
     def run_test_environment(self):
         exe_path = os.path.join("data", "game_files", "HeroesOfValor.exe")
@@ -434,20 +431,20 @@ class MainWindow(QMainWindow):
                     stderr=subprocess.PIPE, 
                     creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                self.terminal.log("Test environment run successfully.")
+                Terminal.log("Test environment run successfully.")
                 if result.stderr:
-                    self.terminal.error(result.stderr.decode())
+                    Terminal.error(result.stderr.decode())
                 if result.stdout:
-                    self.terminal.log(result.stdout.decode())
+                    Terminal.log(result.stdout.decode())
             except subprocess.CalledProcessError as e:
-                self.terminal.log(f"Failed to start test environment. Error: {e.stderr}")
+                Terminal.log(f"Failed to start test environment. Error: {e.stderr}")
                 if e.stderr:
-                    self.terminal.error(e.stderr.decode())
+                    Terminal.error(e.stderr.decode())
                 if e.stdout:
-                    self.terminal.log(e.stdout.decode())
+                    Terminal.log(e.stdout.decode())
         else:
             logging.error(f"'{exe_path}' does not exist.")
-            self.terminal.error(f"'HeroesOfValor.exe' not found at '{exe_path}'. Please check the path and try again.")
+            Terminal.error(f"'HeroesOfValor.exe' not found at '{exe_path}'. Please check the path and try again.")
 
     def remove_unpacked_game_files(self):
         pak_folder_path = r"data\game_files\HeroesOfValor\Content\Paks\HeroesOfValor-WindowsNoEditor"
@@ -461,12 +458,12 @@ class MainWindow(QMainWindow):
             if reply == QMessageBox.StandardButton.Yes:
                 try:
                     shutil.rmtree(pak_folder_path)
-                    self.terminal.log("Unpacked game files have been successfully deleted.")
+                    Terminal.log("Unpacked game files have been successfully deleted.")
                 except Exception as e:
                     logging.error(f"Failed to delete the unpacked game files: {e}")
-                    self.terminal.error(f"Failed to delete the unpacked game files: {e}")
+                    Terminal.error(f"Failed to delete the unpacked game files: {e}")
         else:
-            self.terminal.error("The directory 'HeroesOfValor-WindowsNoEditor' does not exist.")
+            Terminal.error("The directory 'HeroesOfValor-WindowsNoEditor' does not exist.")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
