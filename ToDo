@@ -1,7 +1,5 @@
 -no specific order
 
-remove completion pop up from "DL and Extract 'repak v0.2.2' use the GUI terminal, its there for a reason
-
 prevent additional terminal from opening, appear at least after DL and Import
 
 replace boring paths with cool enviornment variables
