@@ -1,3 +1,5 @@
+# Currently no longer working due to now encrypted game files
+
 # Custom T-Shirt Tool
 
 ***Early Test Version - Bugs and Missing Features are to be expected!***
